@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://AllOb.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Obstacles-26.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Obstacles-28.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Obstacles-25.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Obstacles-27.png" type="Texture" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "Small2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Large",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "Small",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "Double",
+"speed": 5.0
+} ]
+
+[node name="AllOb" type="RigidBody2D" groups=[
+"Obstacle",
+]]
+scale = Vector2( -1, 1 )
+collision_mask = 0
+gravity_scale = 0.0
+linear_velocity = Vector2( 200, 0 )
+linear_damp = 0.0
+script = ExtResource( 1 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( -68, -471 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+animation = "Double"
+centered = false
+
+[node name="Small" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -62.0681, 53.8674, -61.2943, -134.935, -31.8906, -190.647, 28.4643, -132.614, 79.5339, -105.532, 144.532, -72.2589, 210.303, -69.1638, 242.028, -39.7601, 243.576, 55.415 )
+
+[node name="Small2" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( 137.148, 50.0818, 138.44, -41.6754, 192.719, -44.2602, 194.011, -119.217, 234.074, -120.509, 241.828, -165.742, 290.938, -205.805, 321.954, -120.509, 352.971, -107.586, 460.237, -170.911, 500.3, -32.629, 502.884, 52.6665 )
+
+[node name="Large" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 143.102, -196.103 )
+polygon = PoolVector2Array( -80.9111, 247.477, -79.6188, 185.444, -27.9246, 190.613, -22.7551, 163.474, -4.66212, 163.474, 4.38432, 91.1021, 145.251, 3.22189, 150.421, -105.336, 193.068, -109.213, 195.653, -157.03, 237.008, -194.509, 273.194, -100.167, 277.071, 14.8531, 403.722, 20.0225, 401.138, 255.231 )
+
+[node name="Double" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -57.9982, 52.6665, -55.4136, -279.469, -26.9817, -340.21, 31.1743, -282.054, 35.0514, -92.0773, 205.642, -89.4926, 293.523, -73.9843, 293.523, 48.7895, 328.416, 46.2048, 325.831, -31.3366, 360.725, -111.463, 464.114, -168.326, 522.27, -150.233, 537.778, -261.376, 572.672, -289.808, 604.98, -251.037, 607.565, -155.403, 634.705, -146.356, 633.412, 53.9589 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 613.041, 3.0909 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.356863 )
+margin_left = -73.0
+margin_top = -446.0
+margin_right = 610.0
+margin_bottom = 67.0
+
+[node name="NextOb" type="VisibilityNotifier2D" parent="."]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="screen_exited" from="NextOb" to="." method="_on_NextOb_screen_exited"]
